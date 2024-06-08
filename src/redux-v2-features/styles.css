@@ -1,0 +1,26 @@
+.inputs {
+  background-color: #f7f7f7;
+  padding: 32px;
+}
+
+.inputs > * + * {
+  margin-top: 20px;
+}
+
+.balance {
+  position: absolute;
+  top: 75px;
+  right: 60px;
+  background-color: #f7f7f7;
+  padding: 24px 32px;
+  font-weight: bold;
+  font-size: 32px;
+  min-width: 180px;
+  text-align: center;
+}
+
+.paybacks{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
