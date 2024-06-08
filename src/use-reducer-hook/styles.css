@@ -1,0 +1,21 @@
+.counter-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-container {
+  display: inline-block;
+}
+
+.button-container button {
+  background-color: #7d88e6;
+  color: black;
+  margin: 8px 8px;
+}
+
+.button-container button:hover {
+  background-color: #2235e0;
+  transition: border-color 1s;
+}
