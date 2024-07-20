@@ -1,6 +1,5 @@
-import Counter from './use-reducer-hook/Counter';
-
 import React from 'react';
+import Counter from './use-reducer-hook/Counter';
 import Bank from './redux-v2-features';
 import './App.css';
 import MockFetch from './MockFetch/MockFetch';
