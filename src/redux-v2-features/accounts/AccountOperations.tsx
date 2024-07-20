@@ -1,13 +1,27 @@
-/* eslint-disable @typescript-eslint/typedef */
-import { useState } from "react";
-import '../styles.css'
+import { useState, ChangeEvent, SetStateAction, Dispatch  } from "react";
+import '../styles.css';
 
-function AccountOperations() {
-  const [depositAmount, setDepositAmount] = useState("");
-  const [withdrawalAmount, setWithdrawalAmount] = useState("");
-  const [loanAmount, setLoanAmount] = useState("");
-  const [loanPurpose, setLoanPurpose] = useState("");
-  const [currency, setCurrency] = useState("USD");
+enum Currency {
+  USD = "USD",
+  EUR = "EUR",
+  GBP = "GBP",
+}
+
+type StringStateSetter = Dispatch<SetStateAction<string>>;
+type CurrencyStateSetter = Dispatch<SetStateAction<Currency>>;
+
+function useTypedState<T>(initialValue: T): [T, React.Dispatch<React.SetStateAction<T>>] {
+  return useState<T>(initialValue);
+}
+
+
+const AccountOperations: React.FC = () => {
+  // eslint-disable-next-line @typescript-eslint/typedef
+  const [depositAmount, setDepositAmount] = useTypedState<string>("");
+  const [withdrawalAmount, setWithdrawalAmount]: [string, StringStateSetter] = useState("");
+  const [loanAmount, setLoanAmount]: [string, StringStateSetter] = useState("");
+  const [loanPurpose, setLoanPurpose]: [string, StringStateSetter] = useState("");
+  const [currency, setCurrency]: [Currency, CurrencyStateSetter] = useState<Currency>(Currency.USD);
 
   function handleDeposit() {}
 
@@ -26,11 +40,11 @@ function AccountOperations() {
           <input
             type="number"
             value={depositAmount}
-            onChange={(e) => setDepositAmount(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setDepositAmount(e.target.value)}
           />
           <select
             value={currency}
-            onChange={(e) => setCurrency(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLSelectElement>) => setCurrency(e.target.value as Currency)}
           >
             <option value="USD">US Dollar</option>
             <option value="EUR">Euro</option>
@@ -45,7 +59,7 @@ function AccountOperations() {
           <input
             type="number"
             value={withdrawalAmount}
-            onChange={(e) => setWithdrawalAmount(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setWithdrawalAmount(e.target.value)}
           />
           <button onClick={handleWithdrawal}>
             Withdraw {withdrawalAmount}
@@ -57,12 +71,12 @@ function AccountOperations() {
           <input
             type="number"
             value={loanAmount}
-            onChange={(e) => setLoanAmount(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setLoanAmount(e.target.value)}
             placeholder="Loan amount"
           />
           <input
             value={loanPurpose}
-            onChange={(e) => setLoanPurpose(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setLoanPurpose(e.target.value)}
             placeholder="Loan purpose"
           />
           <button onClick={handleRequestLoan}>Request loan</button>

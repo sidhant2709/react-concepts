@@ -1,14 +1,14 @@
-/* eslint-disable @typescript-eslint/typedef */
 import "../styles.css";
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
 import { createCustomer } from "../../redux-v2/reducers/feature-slices/customerSlice";
+import { Dispatch } from "redux";
 
 function Customer() {
-  const [fullName, setFullName] = useState("");
-  const [nationalID, setNationalID] = useState("");
+  const [fullName, setFullName]:[string, React.Dispatch<React.SetStateAction<string>>] = useState("");
+  const [nationalID, setNationalID]: [string, React.Dispatch<React.SetStateAction<string>>] = useState("");
 
-  const dispatch = useDispatch();
+  const dispatch: Dispatch = useDispatch();
 
   function handleClick() {
     if(!fullName || !nationalID) return;
@@ -23,14 +23,14 @@ function Customer() {
           <label>Customer full name</label>
           <input
             value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setFullName(e.target.value)}
           />
         </div>
         <div>
           <label>National ID</label>
           <input
             value={nationalID}
-            onChange={(e) => setNationalID(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setNationalID(e.target.value)}
           />
         </div>
         <button onClick={handleClick}>Create new customer</button>

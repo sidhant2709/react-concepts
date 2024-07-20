@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-
 import '../styles.css';
 
-function formatCurrency(value: any) {
+function formatCurrency(value: number) {
   return new Intl.NumberFormat('en', {
     style: 'currency',
     currency: 'USD',
